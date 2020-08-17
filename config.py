@@ -1,7 +1,7 @@
 """
 
 Designed and Developed by-
-Udayraj Deshmukh 
+Udayraj Deshmukh
 https://github.com/Udayraj123
 
 """
@@ -9,14 +9,14 @@ https://github.com/Udayraj123
 """
 Constants
 """
-display_height = int(640)
-display_width = int(640)
-windowWidth = 1280
-windowHeight = 720
+display_height = int(960)
+display_width = int(540)
+windowWidth = 960
+windowHeight = 540
 
 saveMarked = 1
 saveCropped = 1
-showimglvl = 4
+showimglvl = 0
 saveimglvl = 0
 PRELIM_CHECKS = 0
 

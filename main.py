@@ -27,6 +27,9 @@ from glob import glob
 from csv import QUOTE_NONNUMERIC
 from time import localtime, strftime, time
 
+from grade import grade
+import decode_qr
+
 
 # TODO(beginner task) :-
 # from colorama import init
@@ -42,7 +45,7 @@ def process_dir(root_dir, subdir, template):
         template = Template(template_file)
 
     # look for images in current dir to process
-    paths = config.Paths(os.path.join(args['output_dir'], subdir))   
+    paths = config.Paths(os.path.join(args['output_dir'], subdir))
     exts = ('*.png', '*.jpg')
     omr_files = sorted(
         [f for ext in exts for f in glob(os.path.join(curr_dir, ext))])
@@ -364,7 +367,14 @@ def process_files(omr_files, template, args, out):
         # TODO: Automatic scoring
         #score = evaluate(resp, explain=explain)
         score = 0
-        
+
+        # Obtain data from QR code on exam answer sheet.
+        # qr_data = decode_qr.zbar_decode_file(filepath)
+        qr_data = decode_qr.zbar_decode(inOMR)
+
+        score, incorrect = grade(resp=resp, qr_data=qr_data)
+        print(f"Score returned: {score}")
+
         respArray=[]
         for k in out.respCols:
             respArray.append(resp[k])

@@ -12,3 +12,10 @@ outputs/*
 # !inputs/OMR_Files/
 # !inputs/*.json
 # !inputs/omr_marker.jpg
+
+ExamTemplate.db
+examtemplates/
+.gitmodules
+.idea
+*.iml
+venv

@@ -1,4 +1,8 @@
 imutils>=0.5.2
+opencv-contrib-python>=4.4.0
+opencv-python>=4.4.0
 matplotlib>=3.0.2
 numpy>=1.16.0
 pandas>=0.24.0
+pyzbar>=0.1.8
+sqlalchemy
