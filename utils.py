@@ -9,7 +9,7 @@ https://github.com/Udayraj123
 saveImgList = {}
 resetpos = [0,0]
 # for positioning image windows
-windowX,windowY = 0,0 
+windowX,windowY = 0,0
 
 import re
 import os
@@ -30,7 +30,7 @@ import config
 import template
 
 def setup_dirs(paths):
-    print('\nChecking Directories...')
+    # print('\nChecking Directories...')
     for _dir in [paths.saveMarkedDir]:
         if(not os.path.exists(_dir)):
             print('Created : ' + _dir)
@@ -41,21 +41,24 @@ def setup_dirs(paths):
             # os.mkdir(_dir+sl+'/_BADSCAN_')
             # os.mkdir(_dir+sl+'/_BADSCAN_'+'/stack')
         else:
-            print('Present : ' + _dir)
+            # print('Present : ' + _dir)
+            pass
 
     for _dir in [paths.manualDir, paths.resultDir]:
         if(not os.path.exists(_dir)):
-            print('Created : ' + _dir)
+            # print('Created : ' + _dir)
             os.makedirs(_dir)
         else:
-            print('Present : ' + _dir)
+            # print('Present : ' + _dir)
+            pass
 
     for _dir in [paths.multiMarkedDir, paths.errorsDir, paths.badRollsDir]:
         if(not os.path.exists(_dir)):
-            print('Created : ' + _dir)
+            # print('Created : ' + _dir)
             os.makedirs(_dir)
         else:
-            print('Present : ' + _dir)
+            # print('Present : ' + _dir)
+            pass
 
 
 def waitQ():
@@ -178,17 +181,17 @@ def drawTemplateLayout(
                     cv2.putText(final_align,
                                 '%d'% (cv2.mean(img[rect[0]:rect[1], rect[2]:rect[3]])[0]),
                                 (rect[2] + 2, rect[0] + (boxH * 2) // 3),
-                                cv2.FONT_HERSHEY_SIMPLEX, 
-                                0.6, 
+                                cv2.FONT_HERSHEY_SIMPLEX,
+                                0.6,
                                 config.CLR_BLACK,
                                 2)
         if(shifted):
             cv2.putText(final_align,
-                        's%s'% (shift), 
+                        's%s'% (shift),
                         tuple(s - [template.dims[0] // 20, -d[1] // 2]),
-                        cv2.FONT_HERSHEY_SIMPLEX, 
-                        config.TEXT_SIZE, 
-                        config.CLR_BLACK, 
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        config.TEXT_SIZE,
+                        config.CLR_BLACK,
                         4)
     return final_align
 
@@ -923,7 +926,7 @@ def readResponse(template, image, name, savedir=None, autoAlign=False):
                 while steps < ALIGN_STEPS:
                     L = np.mean(morph_v[s[1]:s[1]+d[1],s[0]+shift-THK:-THK+s[0]+shift+MATCH_COL])
                     R = np.mean(morph_v[s[1]:s[1]+d[1],s[0]+shift-MATCH_COL+d[0]+THK:THK+s[0]+shift+d[0]])
-                    
+
                     # For demonstration purposes-
                     if(QBlock.key == "Int1"):
                         ret = morph_v.copy()
@@ -999,11 +1002,11 @@ def readResponse(template, image, name, savedir=None, autoAlign=False):
         globalTHR, j_low, j_high = getGlobalThreshold(allQVals, looseness=4)
 
         # TODO colorama
-        print(
-            "Thresholding:\t\t globalTHR: ", round(
-                globalTHR, 2), "\tglobalStdTHR: ", round(
-                globalStdTHR, 2), "\t(Looks like a Xeroxed OMR)" if(
-                globalTHR == 255) else "")
+        # print(
+        #     "Thresholding:\t\t globalTHR: ", round(
+        #         globalTHR, 2), "\tglobalStdTHR: ", round(
+        #         globalStdTHR, 2), "\t(Looks like a Xeroxed OMR)" if(
+        #         globalTHR == 255) else "")
         # plt.show()
         # hist = getPlotImg()
         # show("StdHist", hist, 0, 1)
@@ -1069,7 +1072,7 @@ def readResponse(template, image, name, savedir=None, autoAlign=False):
                                       (int(x+boxW/12),
                                       int(y+boxH/12)),
                                       (int(x+boxW-boxW/12), int(y+boxH-boxH/12)),
-                                      config.CLR_DARK_GRAY, 
+                                      config.CLR_DARK_GRAY,
                                       3)
                     else:
                         cv2.rectangle(final_marked,
@@ -1084,7 +1087,7 @@ def readResponse(template, image, name, savedir=None, autoAlign=False):
                         cv2.putText(final_marked,
                                     val,
                                     (x, y),
-                                    cv2.FONT_HERSHEY_SIMPLEX, 
+                                    cv2.FONT_HERSHEY_SIMPLEX,
                                     config.TEXT_SIZE,
                                     (20, 20, 10),
                                     int(1 + 3.5*config.TEXT_SIZE))

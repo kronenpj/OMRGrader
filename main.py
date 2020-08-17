@@ -60,15 +60,15 @@ def process_dir(root_dir, subdir, template):
         args_local = args.copy()
         if("OverrideFlags" in template.options):
             args_local.update(template.options["OverrideFlags"])
-        print('\n------------------------------------------------------------------')
-        print(f'Processing directory "{curr_dir}" with settings- ')
-        print("\tTotal images       : %d" % (len(omr_files)))
-        print("\tCropping Enabled   : " + str(not args_local["noCropping"]))
-        print("\tAuto Alignment     : " + str(args_local["autoAlign"]))
-        print("\tUsing Template     : " + str(template.path) if(template) else "N/A")
-        print("\tUsing Marker       : " + str(template.marker_path)
-              if(template.marker is not None) else "N/A")
-        print('')
+        # print('\n------------------------------------------------------------------')
+        # print(f'Processing directory "{curr_dir}" with settings- ')
+        # print("\tTotal images       : %d" % (len(omr_files)))
+        # print("\tCropping Enabled   : " + str(not args_local["noCropping"]))
+        # print("\tAuto Alignment     : " + str(args_local["autoAlign"]))
+        # print("\tUsing Template     : " + str(template.path) if(template) else "N/A")
+        # print("\tUsing Marker       : " + str(template.marker_path)
+        #       if(template.marker is not None) else "N/A")
+        # print('')
 
         if not template:
             print(f'Error: No template file when processing {curr_dir}.')
@@ -259,14 +259,14 @@ def setup_output(paths, template):
 
     for fileKey, fileName in ns.filesMap.items():
         if(not os.path.exists(fileName)):
-            print("Note: Created new file: %s" % (fileName))
+            # print("Note: Created new file: %s" % (fileName))
             # still append mode req [THINK!]
             ns.filesObj[fileKey] = open(fileName, 'a')
             # Create Header Columns
             pd.DataFrame([ns.sheetCols], dtype=str).to_csv(
                 ns.filesObj[fileKey], quoting=QUOTE_NONNUMERIC, header=False, index=False)
         else:
-            print('Present : appending to %s' % (fileName))
+            # print('Present : appending to %s' % (fileName))
             ns.filesObj[fileKey] = open(fileName, 'a')
 
     return ns
@@ -318,12 +318,12 @@ def process_files(omr_files, template, args, out):
         # set global var for reading
 
         inOMR = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
-        print(
-            '\n[%d] Processing image: \t' %
-            (filesCounter),
-            filepath,
-            "\tResolution: ",
-            inOMR.shape)
+        # print(
+        #     '\n[%d] Processing image: \t' %
+        #     (filesCounter),
+        #     filepath,
+        #     "\tResolution: ",
+        #     inOMR.shape)
 
         OMRCrop = utils.getROI(inOMR, filename, noCropping=args["noCropping"])
 
@@ -361,7 +361,7 @@ def process_files(omr_files, template, args, out):
 
         # concatenate roll nos, set unmarked responses, etc
         resp = processOMR(template, OMRresponseDict)
-        print("\nRead Response: \t", resp)
+        # print("\nRead Response: \t", resp)
 
         #This evaluates and returns the score attribute
         # TODO: Automatic scoring
