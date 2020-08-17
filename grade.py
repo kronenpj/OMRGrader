@@ -45,7 +45,7 @@ def grade(resp, squad="H", explain=False, qr_data=None) -> (int, int):
             for _ in range(0, 50):
                 answer_list.append(LIST_ANS_CONVERSION[next(gen_output)])
             mylog.debug(f"Collected: {answer_list}")
-        except ReferenceError:
+        except NameError:
             print("Template generator not available.")
             exit(1)
 
